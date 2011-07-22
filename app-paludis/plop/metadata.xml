@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>no-herd</herd>
+	<maintainer>
+		<email>insecure@keksbude.net</email>
+		<name>insecure</name>
+	</maintainer>
+	<longdescription lang="en">plop is a patched version of
+		<pkg>app-portage/genlop</pkg> that works with paludis</longdescription>
+</pkgmetadata>
