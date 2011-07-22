@@ -14,8 +14,8 @@ SRC_URI="mirror://sourceforge/java-readline/${P}-src.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~ia64 ~ppc ~ppc64 ~x86 ~x86-fbsd"
-IUSE="editline +readline elibc_FreeBSD"
-REQUIRED_USE="|| ( editline readline )"
+IUSE="editline getline +readline elibc_FreeBSD"
+REQUIRED_USE="|| ( editline getline readline )"
 
 COMMON_DEP="sys-libs/ncurses
 	editline? ( >=dev-libs/libedit-20061103 )"
@@ -38,12 +38,15 @@ java_prepare() {
 
 	#Respect LDFLAGS bug #336302
 	epatch "${FILESDIR}"/${P}-ldflags.patch
+	#current versions of glibc already contain a method named getline #208285
+	epatch "${FILESDIR}/${P}-getline.patch"
 }
 
 src_compile() {
 	local libs
 	use readline && libs="JavaReadline"
 	use editline && libs="${libs} JavaEditline"
+	use getline && libs="${libs} JavaGetline"
 
 	emake -j1 T_LIBS="${libs}" || die "failed to compile"
 	if use doc; then

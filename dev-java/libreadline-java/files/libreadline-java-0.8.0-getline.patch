@@ -1,0 +1,60 @@
+diff -ur libreadline-java-0.8.0/src/native/getline.c libreadline-java-0.8.0.patched/src/native/getline.c
+--- libreadline-java-0.8.0/src/native/getline.c	2003-01-07 11:14:35.000000000 +0100
++++ libreadline-java-0.8.0.patched/src/native/getline.c	2011-07-22 21:52:28.152369001 +0200
+@@ -41,7 +41,7 @@
+ 
+ /********************* exported interface ********************************/
+ 
+-char           *getline();		/* read a line of input */
++char           *get_line();		/* read a line of input */
+ void            gl_setwidth();		/* specify width of screen */
+ void            gl_histadd();		/* adds entries to hist */
+ void		gl_strwidth();		/* to bind gl_strlen */
+@@ -414,7 +414,7 @@
+ }
+ 
+ char *
+-getline(prompt)
++get_line(prompt)
+ char *prompt;
+ {
+     int             c, loc, tmp;
+@@ -916,7 +916,7 @@
+     char *p = buf;
+     int len;
+ 
+-    /* in case we call gl_histadd() before we call getline() */
++    /* in case we call gl_histadd() before we call get_line() */
+     if (gl_init_done < 0) {		/* -1 only on startup */
+         hist_init();
+         gl_init_done = 0;
+diff -ur libreadline-java-0.8.0/src/native/getline.h libreadline-java-0.8.0.patched/src/native/getline.h
+--- libreadline-java-0.8.0/src/native/getline.h	2003-01-07 11:14:35.000000000 +0100
++++ libreadline-java-0.8.0.patched/src/native/getline.h	2011-07-22 21:53:07.840369002 +0200
+@@ -9,7 +9,7 @@
+ 
+ extern char* rl_readline_name;                  /* unused by getline   */
+ #define add_history(buffer) gl_histadd(buffer)
+-#define readline(buffer)    getline(buffer)
++#define readline(buffer)    get_line(buffer)
+ #define clear_history()     hist_init()
+ #define using_history()     hist_init()
+ 
+@@ -18,7 +18,7 @@
+ 
+ typedef size_t (*gl_strwidth_proc)(char *);
+ 
+-char           *getline(char *);		/* read a line of input */
++char           *get_line(char *);		/* read a line of input */
+ void            gl_setwidth(int);		/* specify width of screen */
+ void            gl_histadd(char *);		/* adds entries to hist */
+ void		gl_strwidth(gl_strwidth_proc);	/* to bind gl_strlen */
+@@ -30,7 +30,7 @@
+ 
+ #else	/* not __STDC__ */
+ 
+-char           *getline();	
++char           *get_line();	
+ void            gl_setwidth();
+ void            gl_histadd();
+ void		gl_strwidth();
