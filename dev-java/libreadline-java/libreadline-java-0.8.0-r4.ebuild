@@ -45,11 +45,6 @@ src_compile() {
 	use readline && libs="JavaReadline"
 	use editline && libs="${libs} JavaEditline"
 
-	if [[ -z "${libs}" ]]; then
-		einfo "No relevant USE-flag set, building the default \"readline\""
-		libs="JavaReadline"
-	fi
-
 	emake -j1 T_LIBS="${libs}" || die "failed to compile"
 	if use doc; then
 		emake -j1 apidoc || die "failed to generate docs"
