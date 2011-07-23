@@ -1,0 +1,16 @@
+diff -ru freepops-0.2.9/modules/src/luacurl/lua-curl-0.3.0.diff freepops-0.2.9_patched/modules/src/luacurl/lua-curl-0.3.0.diff
+--- freepops-0.2.9/modules/src/luacurl/lua-curl-0.3.0.diff	2008-10-25 17:46:06.000000000 +0200
++++ freepops-0.2.9_patched/modules/src/luacurl/lua-curl-0.3.0.diff	2011-07-23 13:00:50.345281000 +0200
+@@ -177,3 +177,12 @@
+  
+  # Constants genereated starting from the cURL headers:
+  
++@@ -120,7 +45,7 @@
++ 
++ curl_authopt.h:$(HEADER)
++ 	$(H)cat $(HEADER) | grep "CURLAUTH_" | \
++-		sed "s/#define *CURL/{\"/" | sed "s/ *\/\*.*\*\///" | \
+++		sed "s/#define *CURL/{\"/" | sed "s/ *\/\*.*(\*\/|$)//" | \
++ 		sed "s/ /\",/" | sed "s/$$/},/" > curl_authopt.h
++ 
++ curl_ftpauthopt.h:$(HEADER)
