@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="x86 amd64"
-IUSE="osmarender_perl"
+IUSE="+osmarender_perl"
 
 
 RDEPEND="app-arch/unzip
